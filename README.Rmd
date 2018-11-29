@@ -13,6 +13,11 @@ knitr::opts_chunk$set(
 )
 ```
 # gadmr: An R Interface to the GADM Map Repository
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![CRAN status](https://www.r-pkg.org/badges/version/gadmr)](https://cran.r-project.org/package=gadmr)
+[![Travis build status](https://travis-ci.org/SpatialWorks/gadmr.svg?branch=master)](https://travis-ci.org/SpatialWorks/gadmr)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/SpatialWorks/gadmr?branch=master&svg=true)](https://ci.appveyor.com/project/SpatialWorks/gadmr)
+
 
 [GADM](https://gadm.org) wants to map the administrative areas of all countries, at all levels of sub-division. GADM provides maps and spatial data for all countries and their sub-divisions for download from its website. This package facilitates access to these maps and spatial data for download in R.
 
