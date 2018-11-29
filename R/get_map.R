@@ -49,10 +49,7 @@ get_geopackage <- function(country, version = "gadm3.6", layer){
                                         sep = ""),
                                   call. = TRUE)
 
-  gpkg <- rgdal::readOGR(dsn = paste(tempdir(), "/",
-                                     stringr::str_remove(string = version, pattern = "\\."),
-                                     "_", country, ".gpkg", sep = ""),
-                         layer = layers[layer])
+  gpkg <- rgdal::readOGR(dsn = dsn, layer = layers[layer])
 
   unlink(temp)
 
@@ -60,6 +57,54 @@ get_geopackage <- function(country, version = "gadm3.6", layer){
 }
 
 
+################################################################################
+#
+#' get_shapefile
+#'
+#' Get shapefile format map of a specific country from GADM.
+#'
+#' @param country Three-letter ISO country code. Corresponding three-letter ISO
+#'     code for each country can be found in the \code{list_countries} dataset.
+#' @param version A character vector specifying the GADM version from which to
+#'     get the geopackage download from. Default is \code{gadm3.6} for current
+#'     version of GADM.
+#' @param layer A numeric value specifying which layer from geopackage to get.
+#'     A layer corresponds to the different administrative units of the
+#'     specific country where 1 is country-level.
+#'
+#' @return SpatialPolygonsDataFrame of the specified country map layer.
+#'
+#' @examples
+#'
+#' get_shapefile(country = "AFG", layer = 1)
+#'
+#' @export
+#'
+#
+################################################################################
+
+get_shapefile <- function(country, version = "gadm3.6", layer){
+  temp <- tempfile()
+
+  url <- paste("https://biogeo.ucdavis.edu/data/", version, "/shp/",
+               stringr::str_remove(string = version, pattern = "\\."),
+               "_", country, "_shp.zip", sep = "")
+
+  download.file(url, temp)
+
+  unzip(temp, exdir = tempdir())
+
+  dsn <- tempdir()
+
+  layers <- paste(stringr::str_remove(string = version, pattern = "\\."),
+                  "_", country, "_", layer - 1, sep = "")
+
+  shp <- rgdal::readOGR(dsn = dsn, layer = layers)
+
+  unlink(temp)
+
+  return(shp)
+}
 
 
 ################################################################################
