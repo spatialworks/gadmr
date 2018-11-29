@@ -1,0 +1,14 @@
+Package: gadmr
+Type: Package
+Title: An R Interface to the GADM Map Repository
+Version: 0.1.0
+Authors@R: person("Ernest", "Guevarra", comment = c(ORCID = "0000-0002-4887-4415"), 
+                  email = "ernest@guevarra.io", role = c("aut", "cre"))
+Description: GADM (<https://gadm.org>) wants to map the administrative areas of 
+    all countries, at all levels of sub-division. GADM provides maps and spatial 
+    data for all countries and their sub-divisions for download from its
+    website. This package facilitates access to these maps and spatial data for
+    download in R.
+License: MIT + LICENSE
+Encoding: UTF-8
+LazyData: true
