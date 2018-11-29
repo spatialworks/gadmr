@@ -10,5 +10,6 @@ Description: GADM (<https://gadm.org>) wants to map the administrative areas of
     website. This package facilitates access to these maps and spatial data for
     download in R.
 License: MIT + file LICENSE
+Depends: R (>= 2.10)
 Encoding: UTF-8
 LazyData: true
