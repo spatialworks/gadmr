@@ -10,6 +10,7 @@
 #'
 #' @docType package
 #' @name gadmr
+#' @importFrom utils download.file unzip
 #'
 #
 ################################################################################
