@@ -126,7 +126,7 @@ list_countries_b <- country[!country %in% list_countries_a$country]
 ## Read formatted list
 list_countries <- read.csv("data-raw/list_countries_a.csv")
 
-list_countries <- as.tibble(list_countries)
+list_countries <- tibble::as.tibble(list_countries)
 
 usethis::use_data(list_countries, overwrite = TRUE)
 
