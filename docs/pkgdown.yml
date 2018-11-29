@@ -1,0 +1,8 @@
+pandoc: 2.0.4
+pkgdown: 1.2.0
+pkgdown_sha: ~
+articles: []
+urls:
+  reference: https://spatialworks.org/gadmr/reference
+  article: https://spatialworks.org/gadmr/articles
+
