@@ -111,14 +111,40 @@ get_shapefile <- function(country, version = "gadm3.6", layer){
 #
 #' get_map
 #'
+#' Get map of a specific country from GADM.
 #'
+#' @param format Either \code{gpkg} for \code{Geopackage} format or
+#'     \code{shp} for \code{Shapefile} format.
+#' @param country Three-letter ISO country code. Corresponding three-letter ISO
+#'     code for each country can be found in the \code{list_countries} dataset.
+#' @param version A character vector specifying the GADM version from which to
+#'     get the geopackage download from. Default is \code{gadm3.6} for current
+#'     version of GADM.
+#' @param layer A numeric value specifying which layer from geopackage to get.
+#'     A layer corresponds to the different administrative units of the
+#'     specific country where 1 is country-level.
 #'
+#' @return SpatialPolygonsDataFrame of the specified country map layer.
 #'
+#' @examples
 #'
+#' get_map(format = "gpkg", country = "AFG", layer = 1)
 #'
-#'
-#'
-#'
+#' @export
 #'
 #
 ################################################################################
+
+get_map <- function(format = c("gpkg", "shp"),
+                    country,
+                    version = "gadm3.6",
+                    layer) {
+  if(format == "gpkg") {
+    map <- get_geopackage(country = country, version = version, layer = layer)
+  }
+
+  if(format == "shp") {
+    map <- get_shapefile(country = country, version = version, layer = layer)
+  }
+  return(map)
+}
