@@ -118,8 +118,8 @@ list_countries$country <- ifelse(list_countries$official == "The Bolivarian Repu
 
 write.csv(list_countries, "data-raw/list_countries.csv", row.names = FALSE)
 
-list_countries_a <- list_countries[list_countries$country %in% country | list_countries$official %in% country, ]
-write.csv(list_countries_a, "data-raw/list_countries_a.csv", row.names = FALSE)
+#list_countries_a <- list_countries[list_countries$country %in% country | list_countries$official %in% country, ]
+#write.csv(list_countries_a, "data-raw/list_countries_a.csv", row.names = FALSE)
 
 list_countries_b <- country[!country %in% list_countries_a$country]
 
