@@ -1,0 +1,6 @@
+title: gadmr
+url: https://spatialworks.org/gadmr
+template:
+  params:
+    bootswatch: sandstone
+    #ganalytics: UA-102485058-4
