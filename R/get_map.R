@@ -139,12 +139,13 @@ get_map <- function(format = c("gpkg", "shp"),
                     country,
                     version = "gadm3.6",
                     layer) {
-  if(format == "gpkg") {
+  if("shp" %in% format) {
+    map <- get_shapefile(country = country, version = version, layer = layer)
+  }
+
+  if("gpkg" %in% format) {
     map <- get_geopackage(country = country, version = version, layer = layer)
   }
 
-  if(format == "shp") {
-    map <- get_shapefile(country = country, version = version, layer = layer)
-  }
   return(map)
 }
