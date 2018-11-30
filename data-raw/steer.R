@@ -2,6 +2,8 @@ library(rvest)
 library(magrittr)
 
 
+options(stringsAsFactors = FALSE)
+
 ## Get country list from GADM
 country <- c(
   "Afghanistan", "Akrotiri and Dhekelia", "Åland", "Albania", "Algeria",
