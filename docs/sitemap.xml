@@ -7,6 +7,15 @@
     <loc>https://spatialworks.org/gadmr/reference/gadmr.html</loc>
   </url>
   <url>
+    <loc>https://spatialworks.org/gadmr/reference/get_geopackage.html</loc>
+  </url>
+  <url>
+    <loc>https://spatialworks.org/gadmr/reference/get_map.html</loc>
+  </url>
+  <url>
+    <loc>https://spatialworks.org/gadmr/reference/get_shapefile.html</loc>
+  </url>
+  <url>
     <loc>https://spatialworks.org/gadmr/reference/list_countries.html</loc>
   </url>
 </urlset>
