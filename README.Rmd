@@ -13,8 +13,11 @@ knitr::opts_chunk$set(
 )
 ```
 # gadmr: An R Interface to the GADM Map Repository
+[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![CRAN status](https://www.r-pkg.org/badges/version/gadmr)](https://cran.r-project.org/package=gadmr)
+[![CRAN](https://img.shields.io/cran/l/gadmr.svg)](https://CRAN.R-project.org/package=gadmr)
+[![CRAN](http://cranlogs.r-pkg.org/badges/gadmr)](https://CRAN.R-project.org/package=gadmr)
 [![Travis build status](https://travis-ci.org/SpatialWorks/gadmr.svg?branch=master)](https://travis-ci.org/SpatialWorks/gadmr)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/SpatialWorks/gadmr?branch=master&svg=true)](https://ci.appveyor.com/project/SpatialWorks/gadmr)
 [![Coverage status](https://codecov.io/gh/SpatialWorks/gadmr/branch/master/graph/badge.svg)](https://codecov.io/github/SpatialWorks/gadmr?branch=master)
