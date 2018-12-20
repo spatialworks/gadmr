@@ -11,13 +11,15 @@
 #'     version of GADM.
 #' @param layer A numeric value specifying which layer from geopackage to get.
 #'     A layer corresponds to the different administrative units of the
-#'     specific country where 1 is country-level.
+#'     specific country where 0 is country-level, 1 is the first administrative
+#'     level (usually region, state, province), 2 is the second administrative
+#'     level (usually district, locality, municipality) and so on and so forth.
 #'
 #' @return SpatialPolygonsDataFrame of the specified country map layer.
 #'
 #' @examples
 #'
-#' get_geopackage(country = "AFG", layer = 1)
+#' get_geopackage(country = "AFG", layer = 0)
 #'
 #' @export
 #'
@@ -49,7 +51,7 @@ get_geopackage <- function(country, version = "gadm3.6", layer){
                                         sep = ""),
                                   call. = TRUE)
 
-  gpkg <- rgdal::readOGR(dsn = dsn, layer = layers[layer])
+  gpkg <- rgdal::readOGR(dsn = dsn, layer = rev(layers)[layer + 1])
 
   unlink(temp)
 
@@ -70,13 +72,15 @@ get_geopackage <- function(country, version = "gadm3.6", layer){
 #'     version of GADM.
 #' @param layer A numeric value specifying which layer from geopackage to get.
 #'     A layer corresponds to the different administrative units of the
-#'     specific country where 1 is country-level.
+#'     specific country where 0 is country-level, 1 is the first administrative
+#'     level (usually region, state, province), 2 is the second administrative
+#'     level (usually district, locality, municipality) and so on and so forth.
 #'
 #' @return SpatialPolygonsDataFrame of the specified country map layer.
 #'
 #' @examples
 #'
-#' get_shapefile(country = "AFG", layer = 1)
+#' get_shapefile(country = "AFG", layer = 0)
 #'
 #' @export
 #'
@@ -97,7 +101,7 @@ get_shapefile <- function(country, version = "gadm3.6", layer){
   dsn <- tempdir()
 
   layers <- paste(stringr::str_remove(string = version, pattern = "\\."),
-                  "_", country, "_", layer - 1, sep = "")
+                  "_", country, "_", layer, sep = "")
 
   shp <- rgdal::readOGR(dsn = dsn, layer = layers)
 
