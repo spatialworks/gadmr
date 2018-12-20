@@ -1,5 +1,6 @@
 library(rvest)
 library(magrittr)
+library(rgdal)
 
 
 options(stringsAsFactors = FALSE)
@@ -131,5 +132,15 @@ list_countries <- read.csv("data-raw/list_countries_a.csv")
 list_countries <- tibble::as.tibble(list_countries)
 
 usethis::use_data(list_countries, overwrite = TRUE)
+
+
+#
+#
+#
+rgdal::ogrListLayers(dsn = "data-raw/gadm36_AFG_gpkg/gadm36_AFG.gpkg")
+rgdal::ogrListLayers(dsn = "data-raw/gadm36_LBR_gpkg/gadm36_LBR.gpkg")
+
+
+
 
 
