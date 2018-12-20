@@ -16,7 +16,9 @@ version of GADM.}
 
 \item{layer}{A numeric value specifying which layer from geopackage to get.
 A layer corresponds to the different administrative units of the
-specific country where 1 is country-level.}
+specific country where 0 is country-level, 1 is the first administrative
+level (usually region, state, province), 2 is the second administrative
+level (usually district, locality, municipality) and so on and so forth.}
 }
 \value{
 SpatialPolygonsDataFrame of the specified country map layer.
@@ -26,6 +28,6 @@ Get geopackage format map of a specific country from GADM.
 }
 \examples{
 
-get_geopackage(country = "AFG", layer = 1)
+get_geopackage(country = "AFG", layer = 0)
 
 }
