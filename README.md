@@ -30,6 +30,6 @@ You can install the development version of `gadmr` from
 [GitHub](https://github.com/SpatialWorks/gadmr.git) with:
 
 ``` r
-if(!require(devtools)) install.packages("devtools")
-if(!require(gadmr)) devtools::install_github("SpatialWorks/gadmr")
+if(!require(remotes)) install.packages("remotes")
+if(!require(gadmr)) remotes::install_github("SpatialWorks/gadmr")
 ```
