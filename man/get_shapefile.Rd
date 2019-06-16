@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_map.R
 \name{get_shapefile}
 \alias{get_shapefile}
-\title{get_shapefile}
+\title{Get shapefile format map of a specific country from GADM.}
 \usage{
 get_shapefile(country, version = "gadm3.6", layer)
 }

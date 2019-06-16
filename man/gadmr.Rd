@@ -4,7 +4,11 @@
 \name{gadmr}
 \alias{gadmr}
 \alias{gadmr-package}
-\title{gadmr}
+\title{GADM (<https://gadm.org>) wants to map the administrative areas of all
+countries, at all levels of sub-division. GADM provides maps and spatial
+data for all countries and their sub-divisions for download from its
+website. This package facilitates access to these maps and spatial data for
+download in R.}
 \description{
 GADM (<https://gadm.org>) wants to map the administrative areas of all
 countries, at all levels of sub-division. GADM provides maps and spatial

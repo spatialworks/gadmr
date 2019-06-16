@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_map.R
 \name{get_geopackage}
 \alias{get_geopackage}
-\title{get_geopackage}
+\title{Get geopackage format map of a specific country from GADM.}
 \usage{
 get_geopackage(country, version = "gadm3.6", layer)
 }

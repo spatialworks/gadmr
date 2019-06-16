@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_map.R
 \name{get_map}
 \alias{get_map}
-\title{get_map}
+\title{Get map of a specific country from GADM.}
 \usage{
 get_map(format = c("gpkg", "shp"), country, version = "gadm3.6", layer)
 }
