@@ -1,7 +1,5 @@
 ################################################################################
 #
-#' get_geopackage
-#'
 #' Get geopackage format map of a specific country from GADM.
 #'
 #' @param country Three-letter ISO country code. Corresponding three-letter ISO
@@ -61,8 +59,6 @@ get_geopackage <- function(country, version = "gadm3.6", layer){
 
 ################################################################################
 #
-#' get_shapefile
-#'
 #' Get shapefile format map of a specific country from GADM.
 #'
 #' @param country Three-letter ISO country code. Corresponding three-letter ISO
@@ -113,8 +109,6 @@ get_shapefile <- function(country, version = "gadm3.6", layer){
 
 ################################################################################
 #
-#' get_map
-#'
 #' Get map of a specific country from GADM.
 #'
 #' @param format Either \code{gpkg} for \code{Geopackage} format or
