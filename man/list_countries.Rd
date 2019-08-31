@@ -3,7 +3,7 @@
 \docType{data}
 \name{list_countries}
 \alias{list_countries}
-\title{list_countries}
+\title{Lookup table for countries included in GADM.}
 \format{A data frame with 3 columns and 241 rows:
 \describe{
 \item{\code{country}}{Name of country}
@@ -17,8 +17,7 @@
 list_countries
 }
 \description{
-Lookup table for countries included in GADM. This table includes country
-ISO codes that are used for identifying the respective map and spatial data
-for a specific country.
+This table includes country ISO codes that are used for identifying the
+respective map and spatial data for a specific country.
 }
 \keyword{datasets}
