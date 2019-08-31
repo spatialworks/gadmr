@@ -1,6 +1,29 @@
 title: gadmr
+
 url: https://spatialworks.org/gadmr
+
 template:
   params:
     bootswatch: sandstone
     #ganalytics: UA-102485058-4
+
+home:
+  #strip_header: true
+  links:
+  - text: Read about GADM
+    href: https://gadm.org
+
+reference:
+- title: Description
+  contents:
+  - gadmr
+
+- title: Retrieving maps from gadm.org
+  contents:
+  - get_geopackage
+  - get_shapefile
+  - get_map
+
+- title: Supporting data
+  contents:
+  - list_countries
