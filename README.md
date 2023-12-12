@@ -27,9 +27,9 @@ for download in R.
 ## Installation
 
 You can install the development version of `gadmr` from
-[GitHub](https://github.com/SpatialWorks/gadmr.git) with:
+[GitHub](https://github.com/pol-db4drd2/gadmr.git) with:
 
 ``` r
 if(!require(remotes)) install.packages("remotes")
-if(!require(gadmr)) remotes::install_github("SpatialWorks/gadmr")
+if(!require(gadmr)) remotes::install_github("pol-db4drd2/gadmr")
 ```
