@@ -4,12 +4,15 @@
 \name{list_countries}
 \alias{list_countries}
 \title{Lookup table for countries included in GADM.}
-\format{A data frame with 3 columns and 241 rows:
+\format{
+A data frame with 3 columns and 254 rows:
 \describe{
 \item{\code{country}}{Name of country}
-\item{\code{official}}{Official name of country}
 \item{\code{iso3code}}{Three-letter ISO code of country}
-}}
+\item{\code{max_level}}{Lowest level of administrative units available on GADM (country is level 0)}
+\item{\code{official}}{Official name of country}
+}
+}
 \source{
 \url{https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes}
 }

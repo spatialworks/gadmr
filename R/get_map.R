@@ -1,149 +1,91 @@
 ################################################################################
 #
-#' Get geopackage format map of a specific country from GADM.
+#' Get GADM data for a specific country
 #'
-#' @param country Three-letter ISO country code. Corresponding three-letter ISO
-#'     code for each country can be found in the \code{list_countries} dataset.
-#' @param version A character vector specifying the GADM version from which to
-#'     get the geopackage download from. Default is \code{gadm3.6} for current
-#'     version of GADM.
-#' @param layer A numeric value specifying which layer from geopackage to get.
-#'     A layer corresponds to the different administrative units of the
-#'     specific country where 0 is country-level, 1 is the first administrative
-#'     level (usually region, state, province), 2 is the second administrative
-#'     level (usually district, locality, municipality) and so on and so forth.
+#' @description Download vector map of national/subnational boundaries from GADM.
 #'
-#' @return SpatialPolygonsDataFrame of the specified country map layer.
+#' @param country `character`. Three-letter ISO country code. Corresponding three-letter ISO
+#'     code for each country can be found in the `list_countries` dataset.
+#' @param layer `numeric`. Administrative level to select. `0` is the country level;
+#'     `1` represents first-level divisions (provinces in China, states in USA, regions in Morocco, etc.),
+#'     `2` represents subdivisions within level 1 (US counties, Moroccan provinces, etc.), and so on.
+#' @param version `character`. GADM version to get. Default `"gadm4.1"` (current version 2023-12-12).
+#' @param gsource `character`. Web location of GADM data. Default `"https://geodata.ucdavis.edu/gadm"`.
+#' @param ... ignored.
+#' @return `sf` object of the specified country map layer.
 #'
-#' @examples
+#' @details
 #'
-#' get_geopackage(country = "AFG", layer = 0)
 #'
-#' @export
 #'
-#
-################################################################################
-
-get_geopackage <- function(country, version = "gadm3.6", layer){
-  temp <- tempfile()
-
-  url <- paste("https://biogeo.ucdavis.edu/data/", version, "/gpkg/",
-               stringr::str_remove(string = version, pattern = "\\."),
-               "_", country, "_gpkg.zip", sep = "")
-
-  download.file(url, temp)
-
-  unzip(temp, exdir = tempdir())
-
-  dsn <- paste(tempdir(), "/",
-               stringr::str_remove(string = version, pattern = "\\."),
-               "_", country, ".gpkg", sep = "")
-
-  layers <- rgdal::ogrListLayers(dsn = dsn)
-
-  if(layer > length(layers)) stop(paste("Geopackage has only ",
-                                        length(layers),
-                                        " layers. Specify layer from 1 to ",
-                                        length(layers),
-                                        ". Try again.",
-                                        sep = ""),
-                                  call. = TRUE)
-
-  gpkg <- rgdal::readOGR(dsn = dsn, layer = rev(layers)[layer + 1])
-
-  unlink(temp)
-
-  return(gpkg)
-}
-
-
-################################################################################
-#
-#' Get shapefile format map of a specific country from GADM.
+#' `get_geopackage` and `get_shapefile` and `get_map` are wrappers for (partial) compatibility with any legacy code.
 #'
-#' @param country Three-letter ISO country code. Corresponding three-letter ISO
-#'     code for each country can be found in the \code{list_countries} dataset.
-#' @param version A character vector specifying the GADM version from which to
-#'     get the geopackage download from. Default is \code{gadm3.6} for current
-#'     version of GADM.
-#' @param layer A numeric value specifying which layer from geopackage to get.
-#'     A layer corresponds to the different administrative units of the
-#'     specific country where 0 is country-level, 1 is the first administrative
-#'     level (usually region, state, province), 2 is the second administrative
-#'     level (usually district, locality, municipality) and so on and so forth.
+#' The only download format supported since version 0.2 is GeoPackage. `get_shapefile` will warn and call `get_geopackage`.
 #'
-#' @return SpatialPolygonsDataFrame of the specified country map layer.
+#' @examplesIf FALSE
 #'
-#' @examples
-#'
-#' get_shapefile(country = "AFG", layer = 0)
+#' get_gadm(country = "AFG", layer = 0)
 #'
 #' @export
 #'
 #
 ################################################################################
+get_gadm <- function(country, layer, version = "gadm4.1", gsource = "https://geodata.ucdavis.edu/gadm") {
+  # TODO 2023-12-12: add checks for improper arguments?
+  # NEW 2023-12-12: pretend to vectorize over `country`
+  if(length(country) > 1) {
+    country <- `names<-`(country, country)
 
-get_shapefile <- function(country, version = "gadm3.6", layer){
-  temp <- tempfile()
-
-  url <- paste("https://biogeo.ucdavis.edu/data/", version, "/shp/",
-               stringr::str_remove(string = version, pattern = "\\."),
-               "_", country, "_shp.zip", sep = "")
-
-  download.file(url, temp)
-
-  unzip(temp, exdir = tempdir())
-
-  dsn <- tempdir()
-
-  layers <- paste(stringr::str_remove(string = version, pattern = "\\."),
-                  "_", country, "_", layer, sep = "")
-
-  shp <- rgdal::readOGR(dsn = dsn, layer = layers)
-
-  unlink(temp)
-
-  return(shp)
-}
-
-
-################################################################################
-#
-#' Get map of a specific country from GADM.
-#'
-#' @param format Either \code{gpkg} for \code{Geopackage} format or
-#'     \code{shp} for \code{Shapefile} format.
-#' @param country Three-letter ISO country code. Corresponding three-letter ISO
-#'     code for each country can be found in the \code{list_countries} dataset.
-#' @param version A character vector specifying the GADM version from which to
-#'     get the geopackage download from. Default is \code{gadm3.6} for current
-#'     version of GADM.
-#' @param layer A numeric value specifying which layer from geopackage to get.
-#'     A layer corresponds to the different administrative units of the
-#'     specific country where 1 is country-level.
-#'
-#' @return SpatialPolygonsDataFrame of the specified country map layer.
-#'
-#' @examples
-#'
-#' get_map(format = "gpkg", country = "AFG", layer = 1)
-#'
-#' @export
-#'
-#
-################################################################################
-
-get_map <- function(format = c("gpkg", "shp"),
-                    country,
-                    version = "gadm3.6",
-                    layer) {
-  if("shp" %in% format) {
-    map <- get_shapefile(country = country, version = version, layer = layer)
+    return(lapply(country, get_gadm, version = version, layer = layer, gsource = gsource))
   }
 
-  if("gpkg" %in% format) {
-    map <- get_geopackage(country = country, version = version, layer = layer)
-  }
+  # TODO 2023-12-12: cam this be made flxbl? can we refrain from assuming the file tree of the reference location? should we?
+  ver <- stringr::str_remove(version, "\\.")
+  vcr <- glue::glue("{ver}_{country}")
+  fnm <- glue::glue("{vcr}.gpkg")
+  web <- glue::glue("{gsource}/{version}/gpkg/{fnm}")
 
-  return(map)
+  tdr <- tempdir()
+  tls <- dir(tdr, full.names = TRUE)
+  tfn <- glue::glue("{tdr}/{fnm}")
+  dsn <- tfn
+
+  # 2023-12-12: this is wrapped in `tryCatch` to make sure temp files are cleaned up even if an error occurs
+  tryCatch({
+    utils::download.file(web, tfn)
+
+    # check that the file contains a layer numbered `layer`
+    lay <- sf::st_layers(dsn)
+    lay <- dplyr::as_tibble(lay[names(lay)]) # there is no direct `as_tibble` nor even `as.list` for <sf_layers>
+
+    lay <- tidyr::separate_wider_delim(lay, "name", "_", names = c("ADM_", "ADM", "layer_no"))
+    lay <- dplyr::mutate(lay, layer_no = as.numeric(.data$layer_no))
+
+    if(length(setdiff(layer, lay$layer_no))) {
+      stop(glue::glue("Geopackage for {country} has layers 0 to {max(lay$lay_no)}."))
+    }
+
+    # finally, read the specified layer
+    sf::st_read(dsn, layer = glue::glue("ADM_ADM_{layer}"))
+
+  }, finally = {unlink(setdiff(dir(tempdir(), full.names = TRUE), tls))})
+}
+
+#' @rdname get_gadm
+#' @export
+get_geopackage  <- function(country, layer, version = "gadm4.1", gsource = "https://geodata.ucdavis.edu/gadm") {
+  get_gadm(country, layer, version, gsource)
+}
+
+#' @rdname get_gadm
+#' @export
+get_map <- function(country, layer, version = "gadm4.1", gsource = "https://geodata.ucdavis.edu/gadm", ...) {
+  get_gadm(country, layer, version, gsource)
+}
+
+#' @rdname get_gadm
+#' @export
+get_shapefile  <- function(country, layer, version = "gadm4.1", gsource = "https://geodata.ucdavis.edu/gadm") {
+  warning("Shapefile download is deprecated -- using geopackage format instead.")
+  get_geopackage(country, layer, version, gsource)
 }
