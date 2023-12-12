@@ -31,7 +31,6 @@
 #
 ################################################################################
 get_gadm <- function(country, layer, version = "gadm4.1", gsource = "https://geodata.ucdavis.edu/gadm") {
-  # TODO 2023-12-12: add checks for improper arguments?
   # NEW 2023-12-12: pretend to vectorize over `country`
   if(length(country) > 1) {
     country <- `names<-`(country, country)
@@ -39,7 +38,6 @@ get_gadm <- function(country, layer, version = "gadm4.1", gsource = "https://geo
     return(lapply(country, get_gadm, version = version, layer = layer, gsource = gsource))
   }
 
-  # TODO 2023-12-12: cam this be made flxbl? can we refrain from assuming the file tree of the reference location? should we?
   ver <- stringr::str_remove(version, "\\.")
   vcr <- glue::glue("{ver}_{country}")
   fnm <- glue::glue("{vcr}.gpkg")
